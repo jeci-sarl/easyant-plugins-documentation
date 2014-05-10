@@ -7,17 +7,16 @@
       </head>
       <body>
 		<h1>List of EasyAnt Plugins</h1>
+		<ul>
 		<xsl:for-each select=".//info">
 			<xsl:sort select="@module"/>
-			<h2><xsl:element name="a"><xsl:attribute name="href"><xsl:text>module/</xsl:text><xsl:value-of select="@module"/><xsl:text>.html</xsl:text></xsl:attribute><xsl:value-of select="@module"/>	</xsl:element>
-			</h2>
-			<ul>
-				<li>revision: <xsl:value-of select="@revision"/></li>
-				<li>description: <xsl:apply-templates select="description" /></li>
-            <li><xsl:element name="a">
-				<xsl:attribute name="href"><xsl:text>module/</xsl:text><xsl:value-of select="@module"/><xsl:text>.ivy</xsl:text></xsl:attribute>module.ivy	</xsl:element></li>
+			<li>
+			<xsl:element name="a"><xsl:attribute name="href"><xsl:text>module/</xsl:text><xsl:value-of select="@module"/><xsl:text>.html</xsl:text></xsl:attribute><xsl:value-of select="@module"/>	</xsl:element>
+			(<xsl:value-of select="@revision"/>) :
+			<p>  <xsl:apply-templates select="description" /> </p>
+			</li>
+		</xsl:for-each >
 		</ul>
-			</xsl:for-each >
       </body>
     </html>
   </xsl:template>
