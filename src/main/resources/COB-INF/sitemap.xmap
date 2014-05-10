@@ -25,6 +25,42 @@
   <map:flow language="javascript"/>
 
   <map:pipelines>
+
+    <map:pipeline>
+					<map:match pattern="plugins.xml">
+									<map:generate type="xpathtraversable" src="/opt/ApacheAnt/EasyAnt/plugins/" >
+													<map:parameter name="depth" value="4"/>
+													<map:parameter name="xmlFiles" value="\.ivy$"/>
+													<map:parameter name="xpath" value="/*/info"/>
+									</map:generate>
+									<map:serialize type="xml"/> 
+					</map:match>
+					<map:match pattern="plugins.html">
+									<map:generate type="xpathtraversable" src="/opt/ApacheAnt/EasyAnt/plugins/" >
+													<map:parameter name="depth" value="4"/>
+													<map:parameter name="xmlFiles" value="\.ivy$"/>
+													<map:parameter name="xpath" value="/*/info"/>
+									</map:generate>
+									<map:transform src="pluginsList.xsl" type="xslt"/>
+									<map:serialize type="html"/>
+					</map:match>
+					<map:match pattern="module/*.ivy">
+									<map:generate src="/opt/ApacheAnt/EasyAnt/plugins/{1}/module.ivy" type="file"/>
+									<map:serialize type="xml"/>
+					</map:match>
+					<map:match pattern="module/*.html">
+									<map:generate src="/opt/ApacheAnt/EasyAnt/plugins/{1}/module.ivy" type="file"/>
+									<map:transform src="pluginHtml.xsl" type="xslt">
+										<map:parameter name="basedir" value="/opt/ApacheAnt/EasyAnt/plugins/{1}"/>
+									</map:transform>
+									<map:serialize type="html"/>
+					</map:match>    
+					<!--			<map:match pattern="docToPdf">
+									<map:generate src="myXmlFile.xml" type="file"/>
+									<map:transform src="myXml2PdfFile.xslt" type="xslt"/>
+									<map:serialize type="fo2pdf"/>
+					</map:match> -->
+	</map:pipeline>
     <!--+
         | Demo pipelines
         +-->
