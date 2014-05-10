@@ -66,6 +66,15 @@
 			</li>
 		</xsl:for-each>
 		</ul>
+
+		<h3>Extension Points</h3>
+		<ul>
+		<xsl:for-each select="./extension-point">
+			<li><b><xsl:value-of select="@name" /></b> : <xsl:value-of select="@description" />
+
+			</li>
+		</xsl:for-each>
+		</ul>
   </xsl:template>
 
 
