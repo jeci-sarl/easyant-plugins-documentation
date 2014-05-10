@@ -8,8 +8,8 @@
       <body>
 		<h1>List of EasyAnt Plugins</h1>
 		<xsl:for-each select=".//info">
-			<h2><xsl:element name="a"><xsl:attribute name="href"><xsl:text>module/</xsl:text><xsl:value-of select="@module"/><xsl:text>.html</xsl:text></xsl:attribute><xsl:value-of select="@module"/>
-			</xsl:element>
+			<xsl:sort select="@module"/>
+			<h2><xsl:element name="a"><xsl:attribute name="href"><xsl:text>module/</xsl:text><xsl:value-of select="@module"/><xsl:text>.html</xsl:text></xsl:attribute><xsl:value-of select="@module"/>	</xsl:element>
 			</h2>
 			<ul>
 				<li>revision: <xsl:value-of select="@revision"/></li>
