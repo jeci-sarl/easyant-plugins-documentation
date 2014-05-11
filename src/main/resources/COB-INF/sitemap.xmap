@@ -28,7 +28,7 @@
 
     <map:pipeline>
 					<map:match pattern="plugins.xml">
-									<map:generate type="xpathtraversable" src="/opt/ApacheAnt/EasyAnt/plugins/" >
+									<map:generate type="xpathtraversable" src="${easyant.plugins.dir}" >
 													<map:parameter name="depth" value="4"/>
 													<map:parameter name="xmlFiles" value="\.ivy$"/>
 													<map:parameter name="xpath" value="/*/info"/>
@@ -36,7 +36,7 @@
 									<map:serialize type="xml"/> 
 					</map:match>
 					<map:match pattern="plugins.html">
-									<map:generate type="xpathtraversable" src="/opt/ApacheAnt/EasyAnt/plugins/" >
+									<map:generate type="xpathtraversable" src="${easyant.plugins.dir}" >
 													<map:parameter name="depth" value="4"/>
 													<map:parameter name="xmlFiles" value="\.ivy$"/>
 													<map:parameter name="xpath" value="/*/info"/>
@@ -45,13 +45,13 @@
 									<map:serialize type="html"/>
 					</map:match>
 					<map:match pattern="module/*.ivy">
-									<map:generate src="/opt/ApacheAnt/EasyAnt/plugins/{1}/module.ivy" type="file"/>
+									<map:generate src="${easyant.plugins.dir}{1}/module.ivy" type="file"/>
 									<map:serialize type="xml"/>
 					</map:match>
 					<map:match pattern="module/*.html">
-									<map:generate src="/opt/ApacheAnt/EasyAnt/plugins/{1}/module.ivy" type="file"/>
+									<map:generate src="${easyant.plugins.dir}{1}/module.ivy" type="file"/>
 									<map:transform src="pluginHtml.xsl" type="xslt">
-										<map:parameter name="basedir" value="/opt/ApacheAnt/EasyAnt/plugins/{1}"/>
+										<map:parameter name="basedir" value="${easyant.plugins.dir}{1}"/>
 									</map:transform>
 									<map:serialize type="html"/>
 					</map:match>    
