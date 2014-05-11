@@ -1,7 +1,7 @@
 EasyAnt Plugins Documentation
 =============================
 
-There is no official documentation for EasyAnt standard plugins (org.apache.easyant.plugins) but description exist in each `module.ivy` file.
+There is no official documentation for [Apache EasyAnt](http://ant.apache.org/easyant/) standard plugins (org.apache.easyant.plugins) but description exist in each `module.ivy` file.
 
 I quickly wrote  a [cocoon](http://cocoon.apache.org/) sitemap and two xslt file to generate documentation for these plugins.
 
