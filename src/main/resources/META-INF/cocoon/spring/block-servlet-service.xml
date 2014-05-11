@@ -25,7 +25,7 @@
                            http://cocoon.apache.org/schema/servlet http://cocoon.apache.org/schema/servlet/cocoon-servlet-1.0.xsd">
 
   <bean name="org.apache.easyant.cocoon-plugins-documentation.service" class="org.apache.cocoon.sitemap.SitemapServlet">
-    <servlet:context mount-path="/cocoon-plugins-documentation" context-path="blockcontext:/cocoon-plugins-documentation/"/>
+    <servlet:context mount-path="/" context-path="blockcontext:/cocoon-plugins-documentation/"/>
   </bean>
 
 </beans>
