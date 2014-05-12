@@ -29,4 +29,6 @@ Todo
 
 -    Adding CSS
 -    Try with cocoon-cli
-
+-    adding list of parameter in each `target` (ie `:init` target)
+-    adding link to `<module-name>.ant` file
+-    adding link to other ressources files (see `documentation` plugin)
