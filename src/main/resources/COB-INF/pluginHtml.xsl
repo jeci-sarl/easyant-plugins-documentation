@@ -18,6 +18,11 @@
 				<li>Organisation : <xsl:value-of select="/ivy-module/info/@organisation"/></li>
 				<li>Revision : <xsl:value-of select="/ivy-module/info/@revision"/></li>
 				<li>EasyAnt Required Revision : <xsl:value-of select="$project/ea:core-version/@requiredrevision"/></li>
+				<li>Files :
+					<xsl:element name="a">
+						<xsl:attribute name="href"><xsl:value-of select="@module"/><xsl:text>.ivy</xsl:text></xsl:attribute>
+						module.ivy</xsl:element>
+				</li>
 			</ul>
 
 			<h2>Description</h2>
@@ -25,8 +30,6 @@
 
 			<h2>Ant Script</h2>
 			<xsl:apply-templates select="$project" />
-
-
 
 			<h2>Plugins Details</h2>
 			<h3>Configurations</h3>
@@ -38,8 +41,6 @@
 			<h3>Dependencies</h3>
 			<xsl:apply-templates select="/ivy-module/dependencies" />
 
-
-
 		</body>
 	</html>
 </xsl:template>
@@ -48,7 +49,7 @@
 		<h3>Parameters</h3>
 		<table>
 			<tr><th>Name</th><th>Description</th><th>Default</th></tr>
-		<xsl:for-each select="./ea:parameter">
+		<xsl:for-each select=".//ea:parameter">
 			<tr>
 				<td><xsl:value-of select="@property" /> </td>
 				<td><xsl:value-of select="@description" /> 	</td>
