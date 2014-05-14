@@ -23,14 +23,7 @@
         <map:transform src="welcome.xslt" />
         <map:serialize type="xhtml" />
       </map:match>
-      <map:match pattern="plugins.xml">
-        <map:generate type="xpathtraversable" src="${easyant.plugins.dir}">
-          <map:parameter name="depth" value="4" />
-          <map:parameter name="xmlFiles" value="\.ivy$" />
-          <map:parameter name="xpath" value="/*/info" />
-        </map:generate>
-        <map:serialize type="xml" />
-      </map:match>
+        
       <map:match pattern="plugins.html">
         <map:generate type="xpathtraversable" src="${easyant.plugins.dir}">
           <map:parameter name="depth" value="4" />
@@ -40,10 +33,7 @@
         <map:transform src="pluginsList.xsl" type="xslt" />
         <map:serialize type="html" />
       </map:match>
-      <map:match pattern="module/*.ivy">
-        <map:generate src="${easyant.plugins.dir}/{1}/module.ivy" type="file" />
-        <map:serialize type="xml" />
-      </map:match>
+
       <map:match pattern="module/*.html">
         <map:generate src="${easyant.plugins.dir}/{1}/module.ivy" type="file" />
         <map:transform src="pluginHtml.xsl" type="xslt">
@@ -51,11 +41,7 @@
         </map:transform>
         <map:serialize type="html" />
       </map:match>
-      <!--                    <map:match pattern="docToPdf">
-                                                                        <map:generate src="myXmlFile.xml" type="file"/>
-                                                                        <map:transform src="myXml2PdfFile.xslt" type="xslt"/>
-                                                                        <map:serialize type="fo2pdf"/>
-                                        </map:match> -->
+
     </map:pipeline>
     <map:pipeline id="static-resource">
       <!-- Put matchers for external (accessible to the outside world, e.g. browser) resources here.
