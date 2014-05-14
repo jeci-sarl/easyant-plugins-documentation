@@ -1,6 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <content>
-  <h1>EasyAnt : Plugins Documentation</h1>
+    <h1>EasyAnt : Plugins Documentation</h1>
 
-  <p><a href="plugins.html">List of plugins</a></p>
+    <p> made with apache cocoon !
+    </p>
+    <ul>
+        <li><a href="buildtypes.html">List of buildtypes</a></li>
+        <li><a href="plugins.html">List of plugins</a></li>
+        <li><a href="skeletons.html">List of skeletons</a></li>
+        <li><a href="tasks.html">List of tasks</a></li>
+    </ul>
 </content>

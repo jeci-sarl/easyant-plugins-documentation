@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ea="antlib:org.apache.easyant">
     <xsl:param name="basedir" />
+    <xsl:param name="type" />
     <xsl:variable name="modulename" select="/ivy-module/info/@module" />
     <xsl:variable name="module-antfile" select="concat($basedir, '/src/main/resources/', $modulename, '.ant')" />
     <xsl:variable name="project" select="document( $module-antfile )/project" />
