@@ -10,7 +10,10 @@ Try me
 
 To try this, first checkout Easyant plugins  :
 
-    svn co https://svn.apache.org/repos/asf/ant/easyant/plugins/trunk/ easyant-plugins
+    svn co https://svn.apache.org/repos/asf/ant/easyant/plugins/trunk/ data/easyant-plugins
+    svn co https://svn.apache.org/repos/asf/ant/easyant/buildtypes/trunk/ data/easyant-buildtypes
+    svn co https://svn.apache.org/repos/asf/ant/easyant/skeletons/trunk/ data/easyant-skeletons
+    svn co https://svn.apache.org/repos/asf/ant/easyant/tasks/trunk/ data/easyant-tasks
 
 Then define this path to `src/main/resources/META-INF/cocoon/properties/dev/plugins.properties`
 
@@ -27,7 +30,10 @@ Finally you can access list of plugins documentation : http://localhost:8888/plu
 Todo
 ----
 
--    Adding CSS
 -    Try with cocoon-cli
 -    adding link to `<module-name>.ant` file
 -    adding link to other ressources files (see `documentation` plugin)
+-    update doc to upload data from http://repository.easyant.org/apache-easyant/ ?
+-    list also buildtypes
+-    add more on homepage
+-    add link to official documentation
