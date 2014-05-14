@@ -4,6 +4,8 @@
     <html>
       <head>
         <title>List of EasyAnt Plugins</title>
+        <link rel="stylesheet" href="static/main.css" />
+
       </head>
       <body>
 		<h1>List of EasyAnt Plugins</h1>
