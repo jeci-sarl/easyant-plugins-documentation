@@ -68,20 +68,41 @@
     </xsl:template>
 
     <xsl:template match="project">
-        <div class="col3">
+        <div class="col1">
         <h3>Targets</h3>
-        <ul>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Depends</th>
+            </thead>
             <xsl:for-each select="./target">
-                <li><b><xsl:value-of select="@name" /></b> :
-                    <xsl:value-of select="@description" /><br/>
-                    Depends : <xsl:value-of select="@depends" />
-
-                </li>
+                <xsl:element name="tr">
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 0 ">
+                                <xsl:value-of select="'odd'" />
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="'even'" />
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td>
+                        <b><xsl:value-of select="@name" /></b>
+                    </td>
+                    <td>
+                        <xsl:value-of select="@description" />
+                    </td>
+                    <td>
+                        <xsl:value-of select="@depends" />
+                    </td>
+                </xsl:element>
             </xsl:for-each>
-        </ul>
+        </table>
         </div>
 
-        <div class="col2">
+        <div class="col1">
         <h3>Parameters</h3>
         <table>
             <thead>
@@ -161,6 +182,7 @@
         </div>
 
         <div class="br">
+        <div class="col2">
         <h3>Extension Points</h3>
         <ul>
             <xsl:for-each select="./extension-point">
@@ -171,7 +193,7 @@
             </xsl:for-each>
         </ul>
         </div>
-        <div>
+        <div class="col2">
         <h3>Bind Targets</h3>
         <ul>
             <xsl:for-each select="./bindtargets">
@@ -180,6 +202,7 @@
                 </li>
             </xsl:for-each>
         </ul>
+        </div>
         </div>
 
     </xsl:template>
