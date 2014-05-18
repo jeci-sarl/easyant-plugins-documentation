@@ -40,7 +40,7 @@
         <map:generate src="${data.dir}/${prefix-dir}{1}/{2}/module.ivy" type="file" />
         <map:transform src="pluginHtml.xsl" type="xslt">
           <map:parameter name="type" value="{1}" />
-          <map:parameter name="basedir" value="${easyant.plugins.dir}{2}" />
+          <map:parameter name="basedir" value="${data.dir}/${prefix-dir}{1}/{2}" />
         </map:transform>
         <map:serialize type="html" />
       </map:match>
