@@ -136,3 +136,17 @@ table.list tbody tr.group:hover { background-color:inherit; }
 table {
     width: 100%;
 }
+
+ .col2 {
+    float: left;
+    width: 50%;
+ }
+ .col3 {
+    float: left;
+    width: 33%;
+ }
+
+.br {
+    border-top: 1px solid #DDD;
+    clear: both;
+}

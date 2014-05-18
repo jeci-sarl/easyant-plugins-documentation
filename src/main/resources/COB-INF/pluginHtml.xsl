@@ -45,15 +45,22 @@
             <h2>Ant Script</h2>
             <xsl:apply-templates select="$project" />
 
+
+        <div>
             <h2>Plugins Details</h2>
+        <div class="col3">
             <h3>Configurations</h3>
             <xsl:apply-templates select="/ivy-module/configurations" />
-
+        </div>
+        <div class="col3">
             <h3>Publications</h3>
             <xsl:apply-templates select="/ivy-module/publications" />
-
+        </div>
+        <div class="col3">
             <h3>Dependencies</h3>
             <xsl:apply-templates select="/ivy-module/dependencies" />
+        </div>
+        </div>
 
         </body>
 
@@ -61,6 +68,20 @@
     </xsl:template>
 
     <xsl:template match="project">
+        <div class="col3">
+        <h3>Targets</h3>
+        <ul>
+            <xsl:for-each select="./target">
+                <li><b><xsl:value-of select="@name" /></b> :
+                    <xsl:value-of select="@description" /><br/>
+                    Depends : <xsl:value-of select="@depends" />
+
+                </li>
+            </xsl:for-each>
+        </ul>
+        </div>
+
+        <div class="col2">
         <h3>Parameters</h3>
         <table>
             <thead>
@@ -92,13 +113,20 @@
                 </xsl:element>
             </xsl:for-each>
         </table>
+        </div>
 
+
+        <div class="br">
         <h3>Plugins Deps</h3>
+
+        <div class="col2">
+        <h4>EasyAnt Plugins</h4>
         <ul>
             <xsl:for-each select="./ea:plugin">
                 <li>
                     <xsl:element name="a">
                         <xsl:attribute name="href">
+                            <xsl:text>/plugins/</xsl:text>
                             <xsl:value-of select="@module" />
                             <xsl:text>.html</xsl:text>
                         </xsl:attribute>
@@ -108,7 +136,31 @@
                 </li>
             </xsl:for-each>
         </ul>
+        </div>
 
+        <div class="col2">
+        <h4>EasyAnt Import</h4>
+        <ul>
+            <xsl:for-each select="./ea:import">
+                <xsl:variable name="imp-module" select="substring-before(substring-after(@mrid, '#' ), ';')" />
+                <xsl:variable name="imp-revision" select="substring-after(@mrid, ';')" />
+                <li>
+                    <xsl:element name="a">
+                        <xsl:attribute name="href">
+                            <xsl:text>/plugins/</xsl:text>
+                            <xsl:value-of select="$imp-module" />
+                            <xsl:text>.html</xsl:text>
+                        </xsl:attribute>
+                        <xsl:value-of select="$imp-module" /></xsl:element>
+                    (
+                    <xsl:value-of select="$imp-revision" />)
+                </li>
+            </xsl:for-each>
+        </ul>
+        </div>
+        </div>
+
+        <div class="br">
         <h3>Extension Points</h3>
         <ul>
             <xsl:for-each select="./extension-point">
@@ -118,6 +170,18 @@
                 </li>
             </xsl:for-each>
         </ul>
+        </div>
+        <div>
+        <h3>Bind Targets</h3>
+        <ul>
+            <xsl:for-each select="./bindtargets">
+                <li><b>Extension Points : <xsl:value-of select="@extensionPoint" /></b><br/>
+                    Bind Targets: <xsl:value-of select="@targets" />
+                </li>
+            </xsl:for-each>
+        </ul>
+        </div>
+
     </xsl:template>
 
 
