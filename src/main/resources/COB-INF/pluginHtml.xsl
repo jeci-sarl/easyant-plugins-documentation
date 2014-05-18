@@ -2,11 +2,13 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ea="antlib:org.apache.easyant">
     <xsl:param name="basedir" />
     <xsl:param name="type" />
-    <xsl:variable name="modulename" select="/ivy-module/info/@module" />
-    <xsl:variable name="module-antfile" select="concat($basedir, '/src/main/resources/', $modulename, '.ant')" />
-    <xsl:variable name="project" select="document( $module-antfile )/project" />
+    <xsl:variable name="modulename" select="/eamodule/ivy-module/info/@module" />
 
     <xsl:template match="/">
+        <xsl:apply-templates select="/eamodule/ivy-module" />
+    </xsl:template>
+
+    <xsl:template match="ivy-module">
         <html>
 
         <head>
@@ -21,13 +23,13 @@
             <h1>EasyAnt Plugin : <xsl:value-of select="$modulename"/></h1>
             <ul>
                 <li>Organisation :
-                    <xsl:value-of select="/ivy-module/info/@organisation" />
+                    <xsl:value-of select="./info/@organisation" />
                 </li>
                 <li>Revision :
-                    <xsl:value-of select="/ivy-module/info/@revision" />
+                    <xsl:value-of select="./info/@revision" />
                 </li>
                 <li>EasyAnt Required Revision :
-                    <xsl:value-of select="$project/ea:core-version/@requiredrevision" />
+                    <xsl:value-of select="/eamodule/project/ea:core-version/@requiredrevision" />
                 </li>
                 <li>Files :
                     <xsl:element name="a">
@@ -40,25 +42,25 @@
             </ul>
 
             <h2>Description</h2>
-            <xsl:apply-templates select="/ivy-module/info/description" />
+            <xsl:apply-templates select="./info/description" />
 
             <h2>Ant Script</h2>
-            <xsl:apply-templates select="$project" />
+            <xsl:apply-templates select="/eamodule/project" />
 
 
         <div>
             <h2>Plugins Details</h2>
         <div class="col3">
             <h3>Configurations</h3>
-            <xsl:apply-templates select="/ivy-module/configurations" />
+            <xsl:apply-templates select="./configurations" />
         </div>
         <div class="col3">
             <h3>Publications</h3>
-            <xsl:apply-templates select="/ivy-module/publications" />
+            <xsl:apply-templates select="./publications" />
         </div>
         <div class="col3">
             <h3>Dependencies</h3>
-            <xsl:apply-templates select="/ivy-module/dependencies" />
+            <xsl:apply-templates select="./dependencies" />
         </div>
         </div>
 
