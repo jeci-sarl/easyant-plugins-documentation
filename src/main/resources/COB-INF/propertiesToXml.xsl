@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ea="antlib:org.apache.easyant" xmlns:csv="http://apache.org/cocoon/csv/1.0">
 
-    <xsl:template match="/">
+    <xsl:template match="csv:document">
         <properties>
             <xsl:apply-templates />
         </properties>
-    </xsl:template>
-
-    <xsl:template match="csv:document">
-        <document>
-            <xsl:apply-templates />
-        </document>
     </xsl:template>
 
     <xsl:template match="csv:record">
