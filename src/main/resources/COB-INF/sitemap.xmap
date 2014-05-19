@@ -63,7 +63,7 @@
         <map:aggregate element="eamodule">
             <map:part src="${data.dir}/${prefix-dir}{1}/{2}/module.ivy"/>
             <map:part src="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.ant"/>
-            <map:part src="cocoon://_internal/dirlist/content/xml.xml" />
+            <map:part src="cocoon://properties/{1}/{2}.xml"/>
         </map:aggregate>
         <map:transform src="pluginHtml.xsl" type="xslt">
           <map:parameter name="type" value="{1}" />
