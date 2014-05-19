@@ -43,10 +43,12 @@
     </xsl:template>
 
     <xsl:template match="br">
-        <xsl:element name="br" /></xsl:template>
+        <xsl:element name="br" />
+    </xsl:template>
     <xsl:template match="p">
         <xsl:element name="p">
-            <xsl:apply-templates /></xsl:element>
+            <xsl:apply-templates />
+        </xsl:element>
     </xsl:template>
     <xsl:template match="ol">
         <ol>
