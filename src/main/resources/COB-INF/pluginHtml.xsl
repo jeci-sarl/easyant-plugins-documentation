@@ -105,7 +105,7 @@
         </div>
 
         <div class="col2">
-            <h3>Properties</h3>
+            <h3>Default properties</h3>
             <xsl:apply-templates select="/eamodule/properties" />
         </div>
 
