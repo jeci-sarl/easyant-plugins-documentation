@@ -16,54 +16,62 @@
   limitations under the License.
 -->
 <map:sitemap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd" xmlns:map="http://apache.org/cocoon/sitemap/1.0">
-     <map:components>
-          <map:generators default="file">
-                    <map:generator name="csv"  src="org.apache.cocoon.generation.CSVGenerator"/>
-              </map:generators>
-         </map:components>
+  <map:components>
+    <map:generators default="file">
+      <map:generator name="csv" src="org.apache.cocoon.generation.CSVGenerator" />
+    </map:generators>
+  </map:components>
   <map:pipelines>
     <map:pipeline>
+      <!-- match ROOT, goto welcom page -->
       <map:match pattern="">
         <map:generate src="welcome.xml" />
         <map:transform src="welcome.xslt" />
         <map:serialize type="xhtml" />
       </map:match>
-        
+      <!-- list of components -->
       <map:match pattern="*.html">
         <map:generate type="xpathtraversable" src="${data.dir}/${prefix-dir}{1}">
           <map:parameter name="depth" value="4" />
           <map:parameter name="xmlFiles" value="\.ivy$" />
           <map:parameter name="xpath" value="/*/info" />
         </map:generate>
-        <map:transform src="pluginsList.xsl" type="xslt" >
+        <map:transform src="pluginsList.xsl" type="xslt">
           <map:parameter name="type" value="{1}" />
         </map:transform>
         <map:serialize type="html" />
       </map:match>
-        
+      <!-- Transforme .properties into .xml (if .propeties file exist) -->
       <map:match pattern="properties/*/*.xml">
-        <map:generate type="csv" src="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.properties">
-            <map:parameter name="encoding" value="ISO8859-1"/>
-            <map:parameter name="separator" value="="/>
-        </map:generate>
-        <map:transform src="propertiesToXml.xsl" type="xslt"/>
+        <map:select type="resource-exists">
+          <map:when test="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.properties">
+            <map:generate type="csv" src="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.properties">
+              <map:parameter name="encoding" value="ISO8859-1" />
+              <map:parameter name="separator" value="=" />
+            </map:generate>
+          </map:when>
+          <map:otherwise>
+            <map:generate type="status" />
+          </map:otherwise>
+        </map:select>
+        <map:transform src="propertiesToXml.xsl" type="xslt" />
         <map:serialize type="xml" />
       </map:match>
-        
+      <!-- concat all needed xml files -->
       <map:match pattern="*/*.xml">
         <map:aggregate element="eamodule">
-            <map:part src="${data.dir}/${prefix-dir}{1}/{2}/module.ivy"/>
-            <map:part src="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.ant"/>
-            <map:part src="cocoon://properties/{1}/{2}.xml"/>
+          <map:part src="${data.dir}/${prefix-dir}{1}/{2}/module.ivy" />
+          <map:part src="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.ant" />
+          <map:part src="cocoon://properties/{1}/{2}.xml" />
         </map:aggregate>
         <map:serialize type="xml" />
       </map:match>
-        
+      <!-- concat all needed xml files then transform to readable html -->
       <map:match pattern="*/*.html">
         <map:aggregate element="eamodule">
-            <map:part src="${data.dir}/${prefix-dir}{1}/{2}/module.ivy"/>
-            <map:part src="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.ant"/>
-            <map:part src="cocoon://properties/{1}/{2}.xml"/>
+          <map:part src="${data.dir}/${prefix-dir}{1}/{2}/module.ivy" />
+          <map:part src="${data.dir}/${prefix-dir}{1}/{2}/src/main/resources/{2}.ant" />
+          <map:part src="cocoon://properties/{1}/{2}.xml" />
         </map:aggregate>
         <map:transform src="pluginHtml.xsl" type="xslt">
           <map:parameter name="type" value="{1}" />
@@ -71,12 +79,9 @@
         </map:transform>
         <map:serialize type="html" />
       </map:match>
-
     </map:pipeline>
-      
+    <!-- serve static files, (CSS) -->
     <map:pipeline id="static-resource">
-      <!-- Put matchers for external (accessible to the outside world, e.g. browser) resources here.
-        More details: http://cocoon.zones.apache.org/daisy/cdocs-site-main/g2/1345.html -->
       <map:match pattern="static/**">
         <map:read src="static/{1}" />
       </map:match>

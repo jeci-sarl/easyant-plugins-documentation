@@ -70,7 +70,7 @@
     </xsl:template>
 
     <xsl:template match="project">
-        <div class="col1">
+        <div class="col2">
             <h3>Targets</h3>
             <table>
                 <thead>
@@ -104,7 +104,13 @@
             </table>
         </div>
 
-        <div class="col1">
+        <div class="col2">
+            <h3>Properties</h3>
+            <xsl:apply-templates select="/eamodule/properties" />
+        </div>
+
+
+        <div class="col1 br">
             <h3>Parameters</h3>
             <table>
                 <thead>
@@ -210,6 +216,13 @@
 
     </xsl:template>
 
+    <xsl:template match="properties">
+        <ul>
+            <xsl:for-each select="./property">
+                <li><b><xsl:value-of select="@name"/></b> : <xsl:value-of select="text()"/></li>
+            </xsl:for-each>
+        </ul>
+    </xsl:template>
 
     <xsl:template match="description">
         <div>
